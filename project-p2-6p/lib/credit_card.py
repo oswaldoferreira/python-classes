@@ -38,7 +38,7 @@ class CreditCard(object):
 
     for credit_card in cls.list_from_person(person):
       for transaction in Transaction.objects.values():
-        if transaction.credit_card_id == credit_card.id:
+        if transaction.credit_card_id == credit_card.id and transaction.month == month:
           total += transaction.value
 
     return total

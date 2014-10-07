@@ -59,8 +59,14 @@ class TestCreditCard(unittest.TestCase):
       second_transaction.value >> 200.10
       second_transaction.month >> 10
 
+    with Stub() as third_transaction:
+      third_transaction.credit_card_id >> self.credit_card.id
+      third_transaction.value >> 50.20
+      third_transaction.month >> 11
+
     Transaction.objects = { 1: first_transaction,
-                            2: second_transaction }
+                            2: second_transaction,
+                            3: third_transaction }
 
     CreditCard.month_invoice_from_person(10, first_person) |should| equal_to(
       300.60
